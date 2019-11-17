@@ -9,7 +9,7 @@ This repo contains solutions to the [advent of code](https://adventofcode.com/) 
 This utility module provides code with a uniform way to get input,
 including argument parsing.
 
-That is, it provides an optional `-f`/`--file` flag for specifying an input file.
+That is, it provides an optional `-f` / `--file` flag for specifying an input file.
 If this flag is not specified, input is read from stdin.
 
 ```python
