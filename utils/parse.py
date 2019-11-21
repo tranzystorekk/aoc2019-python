@@ -10,7 +10,7 @@ class Parser:
 
     def input(self):
         inp = sys.stdin
-        if (file:=self.__args.file):
+        if (file := self.__args.file):
             inp = open(file)
 
         return inp
