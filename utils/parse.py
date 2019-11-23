@@ -1,16 +1,13 @@
 import sys
-from argparse import ArgumentParser
+from argparse import ArgumentParser, FileType
 
 class Parser:
     def __init__(self, desc=None):
         parser = ArgumentParser(description=desc)
-        parser.add_argument("-f", "--file", default=None, metavar="FILEPATH", \
-                            help="Input file path, defaults to stdin if this flag is not specified")
+        parser.add_argument("infile", nargs="?", type=FileType('r'), default=sys.stdin, metavar="FILEPATH", \
+                            help="Input file path, default: STDIN")
         self.__args = parser.parse_args()
 
+    @property
     def input(self):
-        inp = sys.stdin
-        if (file := self.__args.file):
-            inp = open(file)
-
-        return inp
+        return self.__args.infile

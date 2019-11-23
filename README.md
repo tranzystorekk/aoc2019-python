@@ -9,15 +9,14 @@ This repo contains solutions to the [advent of code](https://adventofcode.com/) 
 This utility module provides code with a uniform way to get input,
 including argument parsing.
 
-That is, it provides an optional `-f` / `--file` flag for specifying an input file.
-If this flag is not specified, input is read from stdin.
+That is, it provides an optional argument for specifying an input file.
+If this argument is not specified, input is read from stdin.
 
 ```python
 from utils.parse import Parser
 
 parser = Parser(desc="Optional assignment description")
-with parser.input() as input:
+with parser.input as input:
     stripped = (l.strip() for l in input)
-    for line in stripped:
-        print(line)
+    print(*stripped, sep='\n')
 ```
