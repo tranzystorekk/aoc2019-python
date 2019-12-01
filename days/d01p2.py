@@ -22,4 +22,5 @@ for mass in modules:
     chain = fuel_chain(mass)
     valid_chain = takewhile(lambda m: m > 0, chain)
     total_fuel += sum(valid_chain)
+
 print(total_fuel)
