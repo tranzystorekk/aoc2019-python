@@ -13,15 +13,15 @@ def is_valid(password):
     group_len = 1
     is_adjacent_pair_same = False
     for first, second in pairwise(password):
+        if first > second:
+            return False
+
         if first == second:
             group_len += 1
         else:
             if group_len == 2:
                 is_adjacent_pair_same = True
             group_len = 1
-
-        if first > second:
-            return False
 
     # catch adjacency on last pair
     if group_len == 2:

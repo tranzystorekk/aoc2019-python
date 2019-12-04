@@ -12,10 +12,11 @@ def pairwise(iterable):
 def is_valid(password):
     is_adjacent_same = False
     for first, second in pairwise(password):
+        if first > second:
+            return False
+
         if first == second:
             is_adjacent_same = True
-        elif first > second:
-            return False
 
     return is_adjacent_same
 
