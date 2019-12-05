@@ -9,6 +9,14 @@ def reverse_digits(n):
         current //= 10
 
 
+class Args:
+    def __init__(self, args):
+        self.__dict__.update(args)
+
+    def __len__(self):
+        return len(self.__dict__)
+
+
 class Computer:
     def __init__(self, program):
         self.__memory = program
@@ -57,28 +65,29 @@ class Computer:
 
     def __get__args(self, names, mode_code):
         modes = reverse_digits(mode_code)
-        return {name: (mode, self.__memory[self.__pc + pos]) for pos, (name, mode) in enumerate(zip(names, modes), 1)}
+        args = {name: (mode, self.__memory[self.__pc + pos]) for pos, (name, mode) in enumerate(zip(names, modes), 1)}
+        return Args(args)
 
     def __terminate(self, args):
         self.__running = False
 
     def __op(self, op):
         def ret_op(args):
-            m_a, v_a = args['a']
+            m_a, v_a = args.a
             a = self.__get_from_mode(m_a, v_a)
-            m_b, v_b = args['b']
+            m_b, v_b = args.b
             b = self.__get_from_mode(m_b, v_b)
             result = op(a, b)
-            _, dst = args['dst']
+            _, dst = args.dst
             self.__memory[dst] = result
         return ret_op
 
     def __in(self, args):
-        _, addr = args['addr']
+        _, addr = args.addr
         self.__memory[addr] = self.__in_f()
 
     def __out(self, args):
-        m, v = args['addr']
+        m, v = args.addr
         self.__output = self.__get_from_mode(m, v)
 
     def __get_from_mode(self, mode, v):
