@@ -5,7 +5,7 @@ def fuel_req(mass):
     return mass // 3 - 2
 
 
-parser = Parser()
+parser = Parser("Day 1: The Tyranny of the Rocket Equation - Part 1")
 with parser.input as input:
     modules = [int(val) for val in input]
 

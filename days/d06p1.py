@@ -2,7 +2,7 @@ from utils.parse import Parser
 from itertools import groupby
 from operator import itemgetter
 
-parser = Parser()
+parser = Parser("Day 6: Universal Orbit Map - Part 1")
 with parser.input as input:
     mappings = (l.strip().split(')') for l in input)
     orbit_map = [(grav, orb) for grav, orb in mappings]

@@ -47,7 +47,7 @@ class Computer:
         return ret_op
 
 
-parser = Parser()
+parser = Parser("Day 2: 1202 Program Alarm - Part 1")
 with parser.input as input:
     line = input.readline()
     program = [int(el) for el in line.split(',')]

@@ -77,7 +77,7 @@ def dist(pos):
     return abs(x) + abs(y)
 
 
-parser = Parser()
+parser = Parser("Day 3: Crossed Wires - Part 2")
 with parser.input as input:
     line1 = input.readline()
     wire_a = [(path[:1], int(path[1:])) for path in line1.strip().split(',')]

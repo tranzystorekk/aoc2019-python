@@ -150,7 +150,7 @@ def run_series(phases, prog):
     return value
 
 
-parser = Parser()
+parser = Parser("Day 7: Amplification Circuit - Part 1")
 with parser.input as input:
     line = input.readline()
     program = [int(el) for el in line.split(',')]

@@ -129,7 +129,7 @@ class Computer:
         return self.__memory[v]
 
 
-parser = Parser()
+parser = Parser("Day 5: Sunny with a Chance of Asteroids - Part 2")
 with parser.input as input:
     line = input.readline()
     program = [int(el) for el in line.split(',')]

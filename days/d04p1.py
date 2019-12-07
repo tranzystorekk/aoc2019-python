@@ -21,7 +21,7 @@ def is_valid(password):
     return is_adjacent_same
 
 
-parser = Parser()
+parser = Parser("Day 4: Secure Container - Part 1")
 with parser.input as input:
     a, b = map(int, input.readline().split('-'))
 
