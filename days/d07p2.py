@@ -172,16 +172,6 @@ class Link:
         return self.__phase
 
 
-def run_series(phases, prog):
-    value = 0
-    for p in phases:
-        computer = Computer(deepcopy(prog))
-        inp = Link(p, value)
-        computer.run(inp)
-        value = computer.last_output
-    return value
-
-
 def run_feedback_loop(phases, prog):
     links = [Link(p, 0) for p in phases]
     linkage = pairwise(cycle(links))
