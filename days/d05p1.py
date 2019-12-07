@@ -65,7 +65,8 @@ class Computer:
 
     def __get__args(self, names, mode_code):
         modes = reverse_digits(mode_code)
-        args = {name: (mode, self.__memory[self.__pc + pos]) for pos, (name, mode) in enumerate(zip(names, modes), 1)}
+        arg_begin = self.__pc + 1
+        args = {name: (mode, value) for name, mode, value in zip(names, modes, self.__memory[arg_begin:])}
         return Args(args)
 
     def __terminate(self, args):
