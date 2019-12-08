@@ -10,17 +10,17 @@ def grouper(iterable, n, fillvalue=None):
 
 
 def get_color(pixel_stack):
-    skip_transparent = dropwhile(lambda p: p == '2', pixel_stack)
+    skip_transparent = dropwhile(lambda p: p == 2, pixel_stack)
     return next(skip_transparent)
 
 
 def printable_color(c):
-    return '#' if c == '1' else ' '
+    return '#' if c == 1 else ' '
 
 
 parser = Parser("Day 8: Space Image Format - Part 2")
 with parser.input as input:
-    data = input.readline().strip()
+    data = [int(c) for c in input.readline().strip()]
 
 w, h = 25, 6
 layer_size = w * h

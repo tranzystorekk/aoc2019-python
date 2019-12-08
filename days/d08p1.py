@@ -11,14 +11,14 @@ def grouper(iterable, n, fillvalue=None):
 
 parser = Parser("Day 8: Space Image Format - Part 1")
 with parser.input as input:
-    data = input.readline().strip()
+    data = [int(c) for c in input.readline().strip()]
 
 w, h = 25, 6
 layer_size = w * h
 layers = grouper(data, layer_size)
-fewest_zeroes = min(layers, key=lambda l: sum(p == '0' for p in l))
+fewest_zeroes = min(layers, key=lambda l: sum(p == 0 for p in l))
 
-ones = sum(p == '1' for p in fewest_zeroes)
-twos = sum(p == '2' for p in fewest_zeroes)
+ones = sum(p == 1 for p in fewest_zeroes)
+twos = sum(p == 2 for p in fewest_zeroes)
 
 print(ones * twos)
