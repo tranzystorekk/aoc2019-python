@@ -22,8 +22,7 @@ parser = Parser("Day 8: Space Image Format - Part 2")
 with parser.input as input:
     data = input.readline().strip()
 
-w = 25
-h = 6
+w, h = 25, 6
 layer_size = w * h
 layers = grouper(data, layer_size)
 
