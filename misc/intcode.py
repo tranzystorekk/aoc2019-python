@@ -77,6 +77,9 @@ class Machine:
         if not self.__halted:
             self.__run()
 
+    def read(self, pos):
+        return self.__memory[pos]
+
     def __run(self):
         self.__running = True
         while True:
