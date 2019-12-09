@@ -30,6 +30,7 @@ class Machine:
         self.__relative_base = 0
         self.__breakpoints = []
         self.__break_on_output_flag = False
+        self.__output_interrupted = False
 
         self.__opcode_map = {
             1: self.__arithmetic_op(operator.add),
@@ -79,19 +80,23 @@ class Machine:
     def __run(self):
         self.__running = True
         while True:
+            if self.__pc in self.__breakpoints:
+                self.__running = False
+                break
+
             opcode, args = self.__parse_instruction()
             self.__exec(opcode, args)
-            pc_value = self.__pc
-            if not self.__running:
-                break
+
             if self.__jump_flag:
                 self.__pc = self.__jump_addr
                 self.__jump_flag = False
             else:
                 self.__pc += len(args) + 1
 
-            if pc_value in self.__breakpoints:
+            if self.__output_interrupted:
                 self.__running = False
+                self.__output_interrupted = False
+            if not self.__running:
                 break
 
     def __exec(self, opcode, args):
@@ -169,7 +174,7 @@ class Machine:
         self.__output = output_value
 
         if self.__break_on_output_flag:
-            self.__running = False
+            self.__output_interrupted = True
 
     def __get__address_from_mode(self, mode, v):
         if mode == 0:
