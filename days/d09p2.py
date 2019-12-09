@@ -19,25 +19,58 @@ class Args:
 
 
 class Computer:
-    def __init__(self, program):
+    def __init__(self, program, input_func, output_func=lambda v: print(v)):
         self.__memory = program
         self.__output = 0
+        self.__in_f = input_func
+        self.__out_f = output_func
+        self.__running = False
+        self.__halted = False
+        self.__pc = 0
+        self.__jump_flag = False
+        self.__jump_addr = 0
+        self.__relative_base = 0
+        self.__breakpoints = []
+        self.__break_on_output_flag = False
 
     @property
     def last_output(self):
         return self.__output
 
-    def run(self, input_func, output_func):
+    @property
+    def halted(self):
+        return self.__halted
+
+    @property
+    def breakpoints(self):
+        return self.__breakpoints
+
+    @breakpoints.setter
+    def breakpoints(self, values):
+        self.__breakpoints = values
+
+    @property
+    def break_on_output(self):
+        return self.__break_on_output_flag
+
+    @break_on_output.setter
+    def break_on_output(self, value):
+        self.__break_on_output_flag = value
+
+    def run(self):
+        while not self.__halted:
+            self.__run()
+
+    def start_or_resume(self):
+        if not self.__halted:
+            self.__run()
+
+    def __run(self):
         self.__running = True
-        self.__pc = 0
-        self.__in_f = input_func
-        self.__out_f = output_func
-        self.__jump_flag = False
-        self.__jump_addr = 0
-        self.__relative_base = 0
         while True:
             opcode, args = self.__parse_instruction()
             self.__exec(opcode, args)
+            pc_value = self.__pc
             if not self.__running:
                 break
             if self.__jump_flag:
@@ -45,6 +78,10 @@ class Computer:
                 self.__jump_flag = False
             else:
                 self.__pc += len(args) + 1
+
+            if pc_value in self.__breakpoints:
+                self.__running = False
+                break
 
     def __exec(self, opcode, args):
         {
@@ -81,6 +118,7 @@ class Computer:
 
     def __terminate(self, args):
         self.__running = False
+        self.__halted = True
 
     def __arithmetic_op(self, op):
         def ret_op(args):
@@ -130,6 +168,9 @@ class Computer:
         self.__out_f(output_value)
         self.__output = output_value
 
+        if self.__break_on_output_flag:
+            self.__running = False
+
     def __get__address_from_mode(self, mode, v):
         if mode == 0:
             return v
@@ -163,6 +204,5 @@ with parser.input as input:
     program = [int(el) for el in line.split(',')]
 
 program_input = lambda: 2
-program_output = lambda v: print(v)
-computer = Computer(deepcopy(program))
-computer.run(program_input, program_output)
+computer = Computer(deepcopy(program), program_input)
+computer.run()
