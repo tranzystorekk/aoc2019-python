@@ -159,7 +159,7 @@ class Link:
         self.__phase_given = False
 
     def __call__(self, v=None):
-        if not v:
+        if v is None:
             return self.__get_value()
 
         self.__value = v
