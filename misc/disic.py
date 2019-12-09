@@ -22,7 +22,7 @@ def get_n_args(op):
         n = 3
     elif op == 5 or op == 6:
         n = 2
-    elif op == 3 or op == 4:
+    elif op == 3 or op == 4 or op == 9:
         n = 1
 
     return n
@@ -30,11 +30,11 @@ def get_n_args(op):
 
 def is_valid(opcode):
     op = opcode % 100
-    if op not in {1, 2, 3, 4, 5, 6, 7, 8, 99}:
+    if op not in {1, 2, 3, 4, 5, 6, 7, 8, 9, 99}:
         return False
 
     mode_codes = list(reverse_digits_bound(opcode // 100))
-    if any(m not in {0, 1} for m in mode_codes):
+    if any(m not in {0, 1, 2} for m in mode_codes):
         return False
 
     n_mode_codes = len(mode_codes)
@@ -59,7 +59,8 @@ def parse_instruction(prog_slice):
 
 
 def get_arg_symbol(code):
-    return "#" if code == 1 else ""
+    symbols = {0: "", 1: "#", 2: "@"}
+    return symbols[code]
 
 
 parser = Parser("Intcode prettifier")
@@ -67,7 +68,7 @@ with parser.input as input:
     line = input.readline()
     program = [int(el) for el in line.split(',')]
 
-names = {1: "ADD", 2: "MUL", 3: "INP", 4: "OUT", 5: "JNZ", 6: "JEZ", 7: "TLT", 8: "TEQ", 99: "HLT"}
+names = {1: "ADD", 2: "MUL", 3: "INP", 4: "OUT", 5: "JNZ", 6: "JEZ", 7: "TLT", 8: "TEQ", 9: "REL", 99: "HLT"}
 
 pos = 0
 size = len(program)
