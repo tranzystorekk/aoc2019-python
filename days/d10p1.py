@@ -18,8 +18,7 @@ def normalize(p):
 
 
 def count_visible_from(x, y, w, h, asteroids):
-    res = max(w, h)
-    angles = {normalize(p) for p in product(range(1, res), range(1, res))}
+    angles = {normalize(p) for p in product(range(1, w), range(1, h))}
     signs = [1, -1]
     all_signs = ((w_s * sign_w, h_s * sign_h) for (w_s, h_s), sign_w, sign_h in product(angles, signs, signs))
     straight_lines = [(0, 1), (0, -1), (1, 0), (-1, 0)]
