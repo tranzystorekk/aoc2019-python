@@ -42,7 +42,6 @@ class Arcade:
         self.__x = None
         self.__y = None
 
-        # self.__ball_prev_position = None
         self.__ball_current_position = None
         self.__pad_position = None
 
