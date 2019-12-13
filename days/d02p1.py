@@ -1,5 +1,5 @@
 from utils.parse import Parser
-from misc.intcode import Machine
+from aoc.intcode import Machine
 from copy import deepcopy
 
 parser = Parser("Day 2: 1202 Program Alarm - Part 1")

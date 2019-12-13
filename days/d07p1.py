@@ -1,5 +1,5 @@
 from utils.parse import Parser
-from misc.intcode import Machine
+from aoc.intcode import Machine
 from copy import deepcopy
 from itertools import permutations
 

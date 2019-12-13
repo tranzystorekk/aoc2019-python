@@ -1,6 +1,5 @@
 from utils.parse import Parser
-from misc.intcode import Machine
-import operator
+from aoc.intcode import Machine
 
 parser = Parser("Day 5: Sunny with a Chance of Asteroids - Part 2")
 with parser.input as input:

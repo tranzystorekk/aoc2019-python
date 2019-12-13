@@ -1,5 +1,5 @@
 from utils.parse import Parser
-from misc.intcode import Machine
+from aoc.intcode import Machine
 from copy import deepcopy
 
 parser = Parser("Day 9: Sensor Boost - Part 1")

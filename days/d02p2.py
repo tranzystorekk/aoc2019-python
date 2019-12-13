@@ -1,5 +1,5 @@
 from utils.parse import Parser
-from misc.intcode import Machine
+from aoc.intcode import Machine
 from itertools import product
 from copy import deepcopy
 
