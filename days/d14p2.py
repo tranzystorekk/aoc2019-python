@@ -57,7 +57,7 @@ with parser.input as input:
 
         recipes[product_name] = int(product_amount), ings
 
-# binary search of the highest possible produced fuel amount for up to 1 billion ORE
+# binary search of the highest possible produced fuel amount for up to 1 trillion ORE
 lower = 1
 higher = 1000000000000
 last_middle = None
