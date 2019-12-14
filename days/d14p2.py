@@ -10,37 +10,29 @@ def is_direct_ore_product(recipes, name):
 
 
 def get_ore_for_fuel(fuel, recipes):
-    current_searchspace = deque([(0, 'FUEL', fuel)])
-    current_level = 0
+    current_searchspace = deque([('FUEL', fuel)])
     surpluses = {}
     direct_ore_products = []
     while current_searchspace:
-        while current_searchspace:
-            level, name, amount = current_searchspace[0]
-            if level != current_level:
-                break
+        name, amount = current_searchspace.popleft()
 
-            current_searchspace.popleft()
+        unit, ingredients = recipes[name]
+        available_surplus = surpluses.get(name, 0)
+        reduced_amount = max(amount - available_surplus, 0)
+        remaining_surplus = max(available_surplus - amount, 0)
+        mod = reduced_amount % unit
+        produced_recipes = reduced_amount // unit + (1 if mod > 0 else 0)
+        produced_surplus = unit - mod if mod > 0 else 0
+        new_surplus = remaining_surplus + produced_surplus
 
-            unit, ingredients = recipes[name]
-            available_surplus = surpluses.get(name, 0)
-            reduced_amount = max(amount - available_surplus, 0)
-            remaining_surplus = max(available_surplus - amount, 0)
-            mod = reduced_amount % unit
-            produced_recipes = reduced_amount // unit + (1 if mod > 0 else 0)
-            produced_surplus = unit - mod if mod > 0 else 0
-            new_surplus = remaining_surplus + produced_surplus
+        surpluses[name] = new_surplus
 
-            surpluses[name] = new_surplus
+        if produced_recipes > 0:
+            requirements = ((n, a * produced_recipes) for n, a in ingredients if n != 'ORE')
+            current_searchspace.extend(requirements)
 
-            if produced_recipes > 0:
-                requirements = [(level + 1, n, a * produced_recipes) for n, a in ingredients if n != 'ORE']
-                current_searchspace.extend(requirements)
-
-                if is_direct_ore_product(recipes, name):
-                    direct_ore_products.append((name, produced_recipes))
-
-        current_level += 1
+            if is_direct_ore_product(recipes, name):
+                direct_ore_products.append((name, produced_recipes))
 
     sorted_products = sorted(direct_ore_products, key=itemgetter(0))
     accumulated = {n: sum(v[1] for v in vals) for n, vals in groupby(sorted_products, key=itemgetter(0))}
