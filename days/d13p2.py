@@ -96,7 +96,7 @@ class Arcade:
             self.__pad_position = self.__x
 
 
-parser = Parser()
+parser = Parser("Day 13: Care Package - Part 2")
 with parser.input as input:
     line = input.readline()
     program = [int(el) for el in line.split(',')]
