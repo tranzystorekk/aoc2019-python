@@ -1,5 +1,6 @@
 from utils.parse import Parser
 from aoc.intcode import Machine
+from collections import deque
 from copy import deepcopy
 from enum import Enum
 
@@ -39,7 +40,7 @@ class Controller:
         self.__direction = Direction.EAST
         self.__room_map = {(0, 0): Room.FREE}
         self.__decision_picker = iter(Controller.__turns)
-        self.__oxygen_system_found = False
+        self.__area_mapped = False
 
     @property
     def position(self):
@@ -50,7 +51,7 @@ class Controller:
         return self.__room_map
 
     def run(self):
-        while not self.__oxygen_system_found:
+        while not self.__area_mapped:
             self.__droid.start_or_resume()
 
     def __get_direction(self):
@@ -69,8 +70,8 @@ class Controller:
             self.__position = new_pos
             self.__decision_picker = iter(Controller.__turns)
 
-        if room is Room.OXYGEN:
-            self.__oxygen_system_found = True
+        if new_pos == (0, 0):
+            self.__area_mapped = True
 
         decision = next(self.__decision_picker)
         self.__direction = self.__direction.turn(decision)
@@ -103,10 +104,10 @@ def print_map(pos, map):
 
 
 def shortest_path(ship_map):
-    current_searchspace = [(0, (0, 0))]
+    current_searchspace = deque([(0, (0, 0))])
     visited = set()
     while current_searchspace:
-        path_length, p = current_searchspace.pop()
+        path_length, p = current_searchspace.popleft()
 
         current_room = ship_map.get(p, None)
         if current_room is Room.OXYGEN:
