@@ -125,8 +125,8 @@ def time_to_fill(ship_map, start_pos):
         x, y = p
         choices = [(x + a_x, y + a_y) for a_x, a_y in directions]
         mapped = map(lambda p: ship_map.get(p, None), choices)
-        choices_mapped = ((c, m) for c, m in zip(choices, mapped) if m is not None)
-        selected_paths = ((path_length + 1, choice) for choice, room in choices_mapped if choice not in visited and room is not Room.WALL)
+        valid_choices = ((c, m) for c, m in zip(choices, mapped) if c not in visited and m is not None)
+        selected_paths = ((path_length + 1, choice) for choice, room in valid_choices if room is not Room.WALL)
         current_searchspace.extend(selected_paths)
 
     return current_length
