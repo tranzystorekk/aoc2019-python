@@ -32,5 +32,5 @@ with parser.input as input:
 bound_chain = islice(phases(data), 100)
 *_, result = bound_chain
 
-printed = "".join(map(str, islice(result, 8)))
+printed = "".join(map(str, result[:8]))
 print(printed)
