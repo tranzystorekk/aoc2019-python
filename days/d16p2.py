@@ -1,10 +1,5 @@
 from utils.parse import Parser
-from itertools import count, takewhile, cycle, islice, chain, repeat
-
-
-def flatten(list_of_lists):
-    "Flatten one level of nesting"
-    return chain.from_iterable(list_of_lists)
+from itertools import islice, chain, repeat
 
 
 def partial_sum_chain(data):
@@ -15,49 +10,33 @@ def partial_sum_chain(data):
         yield current
 
 
-def segments(size):
-    result = ((i - 1, i + size - 1) for i in count(size, 2 * size))
-    return result
-
-
-def calculate_digit(partial_sums, pos):
-    size = len(partial_sums)
-    segment_size = pos + 1
-    bound_segments = takewhile(lambda p: p[0] < size, segments(segment_size))
-    upper_limited = ((beg, end if end < size else size - 1) for beg, end in bound_segments)
-    segment_sums = (partial_sums[end] - partial_sums[beg] for beg, end in upper_limited)
-    multipliers = cycle([1, -1])
-    calculated = sum(v * m for v, m in zip(segment_sums, multipliers))
-    return abs(calculated) % 10
-
-
-def calculate_phase(data):
-    partial_sums = list(partial_sum_chain(data))
-    size = len(partial_sums)
-    return [calculate_digit(partial_sums, pos) for pos in range(size)]
+def calculate_phase(suffix):
+    partial_chain = partial_sum_chain(reversed(suffix))
+    digits = [abs(v) % 10 for v in partial_chain]
+    digits.reverse()
+    return digits
 
 
 def phase_chain(data):
     current = data
-    n = 1
     while True:
-        print(n)
-        n += 1
         current = calculate_phase(current)
         yield current
 
 
-parser = Parser()
+parser = Parser("Day 16: Flawed Frequency Transmission - Part 2")
 with parser.input as input:
     line = input.readline().strip()
     data = [int(el) for el in line]
 
+# works based on the assumption that message offset lies in the second half of the data
 message_offset = int(line[:7])
 
-real_data = list(flatten(repeat(data, 10000)))
+real_data = chain.from_iterable(repeat(data, 10000))
+relevant_suffix = list(islice(real_data, message_offset, None))
 
-bound_chain = islice(phase_chain(real_data), 100)
+bound_chain = islice(phase_chain(relevant_suffix), 100)
 *_, solution = bound_chain
 
-printed = "".join(map(str, solution[message_offset:message_offset + 8]))
+printed = "".join(map(str, solution[:8]))
 print(printed)
