@@ -132,7 +132,7 @@ def time_to_fill(ship_map, start_pos):
     return current_length
 
 
-parser = Parser()
+parser = Parser("Day 15: Oxygen System - Part 2")
 with parser.input as input:
     line = input.readline()
     program = [int(el) for el in line.split(',')]
