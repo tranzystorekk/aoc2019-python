@@ -65,7 +65,7 @@ def do_time_step(moons):
         m.apply_velocity()
 
 
-parser = Parser()
+parser = Parser("Day 12: The N-Body Problem - Part 1")
 parser.parse()
 with parser.input as input:
     stripped = (l.strip('<>\n') for l in input)

@@ -93,7 +93,7 @@ def find_loop_in_axis(moons, axis_func):
         ordered.append(state)
 
 
-parser = Parser()
+parser = Parser("Day 12: The N-Body Problem - Part 2")
 parser.parse()
 with parser.input as input:
     stripped = (l.strip('<>\n') for l in input)
