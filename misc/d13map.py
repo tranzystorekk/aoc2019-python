@@ -70,6 +70,7 @@ class Arcade:
 
 
 parser = Parser()
+parser.parse()
 with parser.input as input:
     line = input.readline()
     program = [int(el) for el in line.split(',')]

@@ -66,6 +66,7 @@ class Painter:
 
 
 parser = Parser("Day 11: Space Police - Part 1")
+parser.parse()
 with parser.input as input:
     line = input.readline()
     program = [int(el) for el in line.strip().split(',')]

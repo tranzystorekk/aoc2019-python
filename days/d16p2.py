@@ -25,6 +25,7 @@ def phase_chain(data):
 
 
 parser = Parser("Day 16: Flawed Frequency Transmission - Part 2")
+parser.parse()
 with parser.input as input:
     line = input.readline().strip()
     data = [int(el) for el in line]

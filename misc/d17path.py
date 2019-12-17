@@ -89,6 +89,7 @@ class Camera:
 
 
 parser = Parser("Day 17: Set and Forget - Path Finder")
+parser.parse()
 with parser.input as input:
     line = input.readline()
     program = [int(el) for el in line.split(',')]

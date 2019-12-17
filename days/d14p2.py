@@ -45,6 +45,7 @@ def get_ore_for_fuel(fuel, recipes):
 
 
 parser = Parser("Day 14: Space Stoichiometry - Part 2")
+parser.parse()
 with parser.input as input:
     split = (l.strip().split('=>') for l in input)
     recipes = {}

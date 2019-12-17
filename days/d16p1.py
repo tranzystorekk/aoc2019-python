@@ -25,6 +25,7 @@ def phases(initial_data):
 
 
 parser = Parser("Day 16: Flawed Frequency Transmission - Part 1")
+parser.parse()
 with parser.input as input:
     line = input.readline().strip()
     data = [int(el) for el in line]

@@ -66,6 +66,7 @@ def do_time_step(moons):
 
 
 parser = Parser()
+parser.parse()
 with parser.input as input:
     stripped = (l.strip('<>\n') for l in input)
     coordinates = (l.split(',') for l in stripped)

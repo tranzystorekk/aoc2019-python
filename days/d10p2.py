@@ -68,6 +68,7 @@ def clockwise_scanned(x, y, w, h, asteroids):
 
 
 parser = Parser("Day 10: Monitoring Station - Part 2")
+parser.parse()
 with parser.input as input:
     data = [line.strip() for line in input]
 

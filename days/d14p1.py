@@ -10,6 +10,7 @@ def is_direct_ore_product(recipes, name):
 
 
 parser = Parser("Day 14: Space Stoichiometry - Part 1")
+parser.parse()
 with parser.input as input:
     split = (l.strip().split('=>') for l in input)
     recipes = {}

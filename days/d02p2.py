@@ -13,6 +13,7 @@ def run_with_params(program, noun, verb):
 
 
 parser = Parser("Day 2: 1202 Program Alarm - Part 2")
+parser.parse()
 with parser.input as input:
     line = input.readline()
     program = [int(el) for el in line.split(',')]

@@ -19,6 +19,7 @@ def printable_color(c):
 
 
 parser = Parser("Day 8: Space Image Format - Part 2")
+parser.parse()
 with parser.input as input:
     data = [int(c) for c in input.readline().strip()]
 

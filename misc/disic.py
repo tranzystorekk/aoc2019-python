@@ -64,6 +64,7 @@ def get_arg_symbol(code):
 
 
 parser = Parser("Intcode prettifier")
+parser.parse()
 with parser.input as input:
     line = input.readline()
     program = [int(el) for el in line.split(',')]

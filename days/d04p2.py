@@ -31,6 +31,7 @@ def is_valid(password):
 
 
 parser = Parser("Day 4: Secure Container - Part 2")
+parser.parse()
 with parser.input as input:
     a, b = map(int, input.readline().split('-'))
 

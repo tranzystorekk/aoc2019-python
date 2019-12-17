@@ -14,6 +14,7 @@ def fuel_chain(initial_mass):
 
 
 parser = Parser("Day 1: The Tyranny of the Rocket Equation - Part 2")
+parser.parse()
 with parser.input as input:
     modules = [int(val) for val in input]
 

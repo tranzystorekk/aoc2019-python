@@ -34,6 +34,7 @@ def count_visible_from(x, y, w, h, asteroids):
 
 
 parser = Parser("Day 10: Monitoring Station - Part 1")
+parser.parse()
 with parser.input as input:
     data = [line.strip() for line in input]
 

@@ -94,6 +94,7 @@ def find_loop_in_axis(moons, axis_func):
 
 
 parser = Parser()
+parser.parse()
 with parser.input as input:
     stripped = (l.strip('<>\n') for l in input)
     coordinates = (l.split(',') for l in stripped)

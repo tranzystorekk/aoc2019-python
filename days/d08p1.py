@@ -10,6 +10,7 @@ def grouper(iterable, n, fillvalue=None):
 
 
 parser = Parser("Day 8: Space Image Format - Part 1")
+parser.parse()
 with parser.input as input:
     data = [int(c) for c in input.readline().strip()]
 

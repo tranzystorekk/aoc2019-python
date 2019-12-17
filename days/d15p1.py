@@ -127,6 +127,7 @@ def shortest_path(ship_map):
 
 
 parser = Parser("Day 15: Oxygen System - Part 1")
+parser.parse()
 with parser.input as input:
     line = input.readline()
     program = [int(el) for el in line.split(',')]

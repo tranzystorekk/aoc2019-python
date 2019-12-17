@@ -97,6 +97,7 @@ class Arcade:
 
 
 parser = Parser("Day 13: Care Package - Part 2")
+parser.parse()
 with parser.input as input:
     line = input.readline()
     program = [int(el) for el in line.split(',')]

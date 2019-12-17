@@ -3,6 +3,7 @@ from itertools import groupby, dropwhile, zip_longest, tee, takewhile
 from operator import itemgetter, truth
 
 parser = Parser("Day 6: Universal Orbit Map - Part 2")
+parser.parse()
 with parser.input as input:
     mappings = (l.strip().split(')') for l in input)
     orbit_map = [(grav, orb) for grav, orb in mappings]
