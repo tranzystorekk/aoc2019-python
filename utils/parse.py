@@ -2,13 +2,12 @@ import sys
 from argparse import ArgumentParser, FileType
 
 
-class Parser:
+class Parser(ArgumentParser):
     def __init__(self, desc=None):
-        parser = ArgumentParser(description=desc)
-        parser.add_argument("infile", nargs="?", type=FileType('r'), default=sys.stdin, metavar="FILEPATH",
-                            help="Input file path, default: STDIN")
-        self.__args = parser.parse_args()
+        super().__init__(description=desc)
+        self.add_argument("input", nargs="?", type=FileType('r'), default=sys.stdin, metavar="FILEPATH",
+                          help="Input file path, default: STDIN")
 
-    @property
-    def input(self):
-        return self.__args.infile
+    def parse(self):
+        args = self.parse_args()
+        self.__dict__.update(vars(args))
