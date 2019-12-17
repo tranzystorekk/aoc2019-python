@@ -69,7 +69,7 @@ class Arcade:
         self.__grid[coords] = Tile(value)
 
 
-parser = Parser()
+parser = Parser("Day 13: Care Package - Print Screen")
 parser.parse()
 with parser.input as input:
     line = input.readline()
