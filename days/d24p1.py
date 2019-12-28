@@ -19,7 +19,7 @@ class GameOfLife:
         elems = (self.__prev[pos] for pos in product(range(5), range(5)))
         initial_biodiv = sum(1 << i for i, el in enumerate(elems) if el is Entity.BUG)
 
-        self.__recorded_states = set([initial_biodiv])
+        self.__recorded_states = {initial_biodiv}
 
     @property
     def current_biodiversity(self):
