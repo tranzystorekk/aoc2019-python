@@ -12,6 +12,8 @@ The files under the [days](days) directory are most conveniently run as python m
 python3 -m days.d01p1 <input file>
 ```
 
+The `input` directory is conveniently included to store your personal input and test files.
+
 ## [utils.parse](utils/parse.py)
 
 This utility module provides code with a uniform way to get input,
