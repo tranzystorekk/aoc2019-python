@@ -57,6 +57,7 @@ class GameOfLife:
 
         return current_state
 
+
 parser = Parser("Day 24: Planet of Discord - Part 1")
 parser.parse()
 with parser.input as input:
