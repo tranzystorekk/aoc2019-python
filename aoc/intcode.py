@@ -77,6 +77,10 @@ class Machine:
         if not self.__halted:
             self.__run()
 
+    def step(self):
+        if not self.__halted:
+            self.__step()
+
     def read(self, pos):
         return self.__memory[pos]
 
@@ -87,20 +91,23 @@ class Machine:
                 self.__running = False
                 break
 
-            opcode, args = self.__parse_instruction()
-            self.__exec(opcode, args)
-
-            if self.__jump_flag:
-                self.__pc = self.__jump_addr
-                self.__jump_flag = False
-            else:
-                self.__pc += len(args) + 1
+            self.__step()
 
             if self.__output_interrupted:
                 self.__running = False
                 self.__output_interrupted = False
             if not self.__running:
                 break
+
+    def __step(self):
+        opcode, args = self.__parse_instruction()
+        self.__exec(opcode, args)
+
+        if self.__jump_flag:
+            self.__pc = self.__jump_addr
+            self.__jump_flag = False
+        else:
+            self.__pc += len(args) + 1
 
     def __exec(self, opcode, args):
         self.__opcode_map[opcode](args)
