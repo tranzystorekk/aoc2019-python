@@ -1,4 +1,5 @@
 import operator
+from functools import partial
 
 
 def _reverse_digits(n):
@@ -37,8 +38,8 @@ class Machine:
             2: self.__arithmetic_op(operator.mul),
             3: self.__in,
             4: self.__out,
-            5: self.__jump_op(lambda v: v != 0),
-            6: self.__jump_op(lambda v: v == 0),
+            5: self.__jump_op(partial(operator.ne, 0)),
+            6: self.__jump_op(partial(operator.eq, 0)),
             7: self.__comp_op(operator.lt),
             8: self.__comp_op(operator.eq),
             9: self.__rel_base_op,
