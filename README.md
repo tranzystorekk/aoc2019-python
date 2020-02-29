@@ -4,6 +4,8 @@
 
 This repo contains solutions to the [advent of code](https://adventofcode.com/) 2019 edition.
 
+Now requires Python >= 3.8!
+
 ## How to use
 
 The files under the [days](days) directory are most conveniently run as python modules:

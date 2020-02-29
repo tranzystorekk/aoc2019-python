@@ -2,15 +2,22 @@ from itertools import takewhile
 from utils.parse import Parser
 
 
+def successors(start, func):
+    next = start
+    while next is not None:
+        yield next
+        next = func(next)
+
+
 def fuel_req(mass):
     return mass // 3 - 2
 
 
-def fuel_chain(initial_mass):
-    current = fuel_req(initial_mass)
-    while True:
-        yield current
-        current = fuel_req(current)
+def fuel_req_chained(initial_mass):
+    start = val if (val := fuel_req(initial_mass)) > 0 else None
+    chain = successors(start, fuel_req)
+    valid_chain = takewhile(lambda val: val > 0, chain)
+    return sum(valid_chain)
 
 
 parser = Parser("Day 1: The Tyranny of the Rocket Equation - Part 2")
@@ -18,10 +25,6 @@ parser.parse()
 with parser.input as input:
     modules = [int(val) for val in input]
 
-total_fuel = 0
-for mass in modules:
-    chain = fuel_chain(mass)
-    valid_chain = takewhile(lambda m: m > 0, chain)
-    total_fuel += sum(valid_chain)
+total_fuel = sum(fuel_req_chained(v) for v in modules)
 
 print(total_fuel)
