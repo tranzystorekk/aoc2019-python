@@ -23,11 +23,7 @@ def is_valid(password):
                 is_adjacent_pair_same = True
             group_len = 1
 
-    # catch adjacency on last pair
-    if group_len == 2:
-        is_adjacent_pair_same = True
-
-    return is_adjacent_pair_same
+    return group_len == 2 or is_adjacent_pair_same
 
 
 parser = Parser("Day 4: Secure Container - Part 2")
