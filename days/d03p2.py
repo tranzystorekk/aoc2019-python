@@ -15,10 +15,6 @@ class Grid:
         }[direction](start, length)
 
     @property
-    def intersections(self):
-        return self.__intersections
-
-    @property
     def cells(self):
         return self.__cells
 
