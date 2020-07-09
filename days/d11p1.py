@@ -25,7 +25,8 @@ class Direction(Enum):
 
 class Painter:
     def __init__(self, program):
-        self.__cpu = Machine(program, self.__get_panel_color, self.__get_instructions)
+        self.__cpu = Machine(
+            program, self.__get_panel_color, self.__get_instructions)
         self.__coordinates = 0, 0
         self.__dir = Direction.NORTH
         self.__grid = defaultdict(int)

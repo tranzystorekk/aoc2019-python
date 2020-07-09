@@ -30,7 +30,8 @@ with parser.input as input:
     line = input.readline().strip()
     data = [int(el) for el in line]
 
-# works based on the assumption that message offset lies in the second half of the data
+# works based on the assumption
+# that message offset lies in the second half of the data
 message_offset = int(line[:7])
 
 real_data = chain.from_iterable(repeat(data, 10000))

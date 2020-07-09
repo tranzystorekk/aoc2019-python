@@ -34,7 +34,8 @@ class Link:
 def run_feedback_loop(phases, prog):
     links = [Link(p, 0) for p in phases]
     linkage = pairwise(cycle(links))
-    comps = [Machine(deepcopy(prog), i, o) for i, o in islice(linkage, len(links))]
+    comps = [Machine(deepcopy(prog), i, o)
+             for i, o in islice(linkage, len(links))]
     for c in comps:
         c.break_on_output = True
     while not all(c.halted for c in comps):
@@ -50,6 +51,7 @@ with parser.input as input:
     line = input.readline()
     program = [int(el) for el in line.split(',')]
 
-max_output = max(run_feedback_loop(t, program) for t in permutations(range(5, 10)))
+max_output = max(run_feedback_loop(t, program)
+                 for t in permutations(range(5, 10)))
 
 print(max_output)

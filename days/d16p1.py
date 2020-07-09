@@ -12,7 +12,8 @@ def get_pattern(position):
 
 def compute_phase(data):
     size = len(data)
-    calculated = (sum(n * p for n, p in zip(data, get_pattern(pos))) for pos in range(size))
+    calculated = (sum(n * p for n, p in zip(data, get_pattern(pos)))
+                  for pos in range(size))
     output = [abs(n) % 10 for n in calculated]
     return output
 

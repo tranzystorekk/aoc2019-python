@@ -26,7 +26,8 @@ class VacuumRobot:
 
 # use misc.d17path to obtain the path and then manually divide it into routines
 parser = Parser("Day 17: Set and Forget - Part 2")
-parser.add_argument("--routine", type=FileType('r'), metavar="ROUTINE", required=True,
+parser.add_argument("--routine", type=FileType('r'),
+                    metavar="ROUTINE", required=True,
                     help="File with movement routine description")
 parser.parse()
 with parser.input as input, parser.routine as routine:

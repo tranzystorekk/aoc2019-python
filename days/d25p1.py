@@ -40,7 +40,8 @@ class Droid:
         self.__output.clear()
 
 
-# This part is interactive, navigate Santa's ship and get through the Pressure-Sensitive Floor to win!
+# This part is interactive, navigate Santa's ship
+# and get through the Pressure-Sensitive Floor to win!
 parser = Parser("Day 25: Cryostasis - Part 1")
 parser.parse()
 with parser.input as inp:

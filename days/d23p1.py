@@ -24,7 +24,8 @@ class SendState(Enum):
 class Computer:
     def __init__(self, id, program, send_callback):
         self.__id = id
-        self.__cpu = Machine(program, self.__receive_message, self.__send__message)
+        self.__cpu = Machine(
+            program, self.__receive_message, self.__send__message)
         self.__msg_queue = deque()
         self.__send_callback = send_callback
         self.__state = SendState.NOTHING_READ
@@ -77,7 +78,8 @@ class Computer:
 
 class Network:
     def __init__(self, program):
-        self.__computers = [Computer(id, deepcopy(program), self.__send_message) for id in range(50)]
+        self.__computers = [Computer(id, deepcopy(
+            program), self.__send_message) for id in range(50)]
         self.__special_msg = None
 
     @property

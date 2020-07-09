@@ -20,13 +20,15 @@ def normalize(p):
 def count_visible_from(x, y, w, h, asteroids):
     angles = {normalize(p) for p in product(range(1, w), range(1, h))}
     signs = [1, -1]
-    all_signs = ((w_s * sign_w, h_s * sign_h) for (w_s, h_s), sign_w, sign_h in product(angles, signs, signs))
+    all_signs = ((w_s * sign_w, h_s * sign_h)
+                 for (w_s, h_s), sign_w, sign_h in product(angles, signs, signs))
     straight_lines = [(0, 1), (0, -1), (1, 0), (-1, 0)]
     lines = chain(all_signs, straight_lines)
 
     n_visible = 0
     for w_s, h_s in lines:
-        sline = takewhile(lambda p: w > p[0] >= 0 and h > p[1] >= 0, scanline(x, y, w_s, h_s))
+        sline = takewhile(
+            lambda p: w > p[0] >= 0 and h > p[1] >= 0, scanline(x, y, w_s, h_s))
         dropped = dropwhile(lambda p: p not in asteroids, sline)
         n_visible += 1 if any(True for _ in dropped) else 0
 
@@ -42,7 +44,9 @@ width = len(data[0])
 height = len(data)
 
 flattened = "".join(data)
-asteroids = {(i % width, i // width) for i, symbol in enumerate(flattened) if symbol == '#'}
+asteroids = {(i % width, i // width)
+             for i, symbol in enumerate(flattened) if symbol == '#'}
 
-max_visible = max(count_visible_from(x, y, width, height, asteroids) for x, y in asteroids)
+max_visible = max(count_visible_from(x, y, width, height, asteroids)
+                  for x, y in asteroids)
 print(max_visible)

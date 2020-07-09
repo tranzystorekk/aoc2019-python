@@ -17,7 +17,8 @@ class GameOfLife:
         self.__current = None
 
         elems = (self.__prev[pos] for pos in product(range(5), range(5)))
-        initial_biodiv = sum(1 << i for i, el in enumerate(elems) if el is Entity.BUG)
+        initial_biodiv = sum(
+            1 << i for i, el in enumerate(elems) if el is Entity.BUG)
 
         self.__recorded_states = {initial_biodiv}
 
@@ -30,8 +31,10 @@ class GameOfLife:
         while True:
             self.__step()
 
-            current_elems = (self.__current[pos] for pos in product(range(5), range(5)))
-            current_biodiv = sum(1 << i for i, el in enumerate(current_elems) if el is Entity.BUG)
+            current_elems = (self.__current[pos]
+                             for pos in product(range(5), range(5)))
+            current_biodiv = sum(1 << i for i, el in enumerate(
+                current_elems) if el is Entity.BUG)
 
             if current_biodiv in self.__recorded_states:
                 break
@@ -40,12 +43,14 @@ class GameOfLife:
             self.__prev = self.__current
 
     def __step(self):
-        self.__current = {pos: self.__calculate_state(pos) for pos in product(range(5), range(5))}
+        self.__current = {pos: self.__calculate_state(
+            pos) for pos in product(range(5), range(5))}
 
     def __calculate_state(self, pos):
         x, y = pos
         adjacent = ((x + az_x, y + az_y) for az_x, az_y in GameOfLife.__dirs)
-        n_adjacent_bugs = sum(1 for p in adjacent if self.__prev.get(p, Entity.EMPTY) is Entity.BUG)
+        n_adjacent_bugs = sum(1 for p in adjacent if self.__prev.get(
+            p, Entity.EMPTY) is Entity.BUG)
 
         current_state = self.__prev[pos]
 

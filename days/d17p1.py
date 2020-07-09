@@ -62,11 +62,13 @@ max_y = max(y for _, y in image.keys())
 
 directions = [(0, 1), (1, 0), (0, -1), (-1, 0)]
 
-scaffold_scan = ((x, y) for y in range(min_y, max_y + 1) for x in range(min_x, max_x + 1) if image[(x, y)] is Pixel.SCAFFOLD)
+scaffold_scan = ((x, y) for y in range(min_y, max_y + 1)
+                 for x in range(min_x, max_x + 1) if image[(x, y)] is Pixel.SCAFFOLD)
 total_alignment = 0
 for x, y in scaffold_scan:
     adjacent = ((x + d_x, y + d_y) for d_x, d_y in directions)
-    adjacent_scaffolds = sum(1 for p in adjacent if image.get(p, None) is Pixel.SCAFFOLD)
+    adjacent_scaffolds = sum(
+        1 for p in adjacent if image.get(p, None) is Pixel.SCAFFOLD)
     if adjacent_scaffolds > 2:
         total_alignment += x * y
 

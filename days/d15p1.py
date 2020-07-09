@@ -34,7 +34,8 @@ class Controller:
     __turns = [1, -1, -1, -1]
 
     def __init__(self, program):
-        self.__droid = Machine(program, self.__get_direction, self.__get_status)
+        self.__droid = Machine(
+            program, self.__get_direction, self.__get_status)
         self.__droid.break_on_output = True
         self.__position = (0, 0)
         self.__direction = Direction.EAST
@@ -96,7 +97,8 @@ def print_map(pos, map):
     min_x = min(x for x, _ in map.keys())
     min_y = min(y for _, y in map.keys())
 
-    map = [[get_printable_field(x, y, pos, map) for x in range(min_x, max_x + 1)] for y in range(max_y, min_y - 1, -1)]
+    map = [[get_printable_field(x, y, pos, map) for x in range(
+        min_x, max_x + 1)] for y in range(max_y, min_y - 1, -1)]
 
     rows = ("".join(r) for r in map)
     print(*rows, sep='\n')
@@ -119,8 +121,10 @@ def shortest_path(ship_map):
         x, y = p
         choices = [(x + a_x, y + a_y) for a_x, a_y in directions]
         mapped = map(lambda p: ship_map.get(p, None), choices)
-        valid_choices = ((c, m) for c, m in zip(choices, mapped) if c not in visited and m is not None)
-        selected_paths = ((path_length + 1, choice) for choice, room in valid_choices if room is not Room.WALL)
+        valid_choices = ((c, m) for c, m in zip(choices, mapped)
+                         if c not in visited and m is not None)
+        selected_paths = ((path_length + 1, choice)
+                          for choice, room in valid_choices if room is not Room.WALL)
         current_searchspace.extend(selected_paths)
 
     return None

@@ -25,7 +25,8 @@ class Direction(Enum):
 
 class Painter:
     def __init__(self, program):
-        self.__cpu = Machine(program, self.__get_panel_color, self.__get_instructions)
+        self.__cpu = Machine(
+            program, self.__get_panel_color, self.__get_instructions)
         self.__coordinates = 0, 0
         self.__dir = Direction.NORTH
         self.__grid = defaultdict(int)
@@ -79,6 +80,7 @@ max_y = max(y for _, y in white_panels)
 min_x = min(x for x, _ in white_panels)
 min_y = min(y for _, y in white_panels)
 
-painted_grid = [['#' if (x, y) in white_panels else ' ' for x in range(min_x, max_x + 1)] for y in range(max_y, min_y - 1, -1)]
+painted_grid = [['#' if (x, y) in white_panels else ' ' for x in range(
+    min_x, max_x + 1)] for y in range(max_y, min_y - 1, -1)]
 rows = ("".join(r) for r in painted_grid)
 print(*rows, sep='\n')

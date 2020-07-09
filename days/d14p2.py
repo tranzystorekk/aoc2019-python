@@ -28,18 +28,22 @@ def get_ore_for_fuel(fuel, recipes):
         surpluses[name] = new_surplus
 
         if produced_recipes > 0:
-            requirements = ((n, a * produced_recipes) for n, a in ingredients if n != 'ORE')
+            requirements = ((n, a * produced_recipes)
+                            for n, a in ingredients if n != 'ORE')
             current_searchspace.extend(requirements)
 
             if is_direct_ore_product(recipes, name):
                 direct_ore_products.append((name, produced_recipes))
 
     sorted_products = sorted(direct_ore_products, key=itemgetter(0))
-    accumulated = {n: sum(v[1] for v in vals) for n, vals in groupby(sorted_products, key=itemgetter(0))}
+    accumulated = {n: sum(v[1] for v in vals)
+                   for n, vals in groupby(sorted_products, key=itemgetter(0))}
 
-    ore_recipes = {name: sum(v for _, v in recipes[name][1]) for name in accumulated.keys()}
+    ore_recipes = {
+        name: sum(v for _, v in recipes[name][1]) for name in accumulated.keys()}
 
-    required_ore = sum(n_recipes * ore_recipes[name] for name, n_recipes in accumulated.items())
+    required_ore = sum(n_recipes * ore_recipes[name]
+                       for name, n_recipes in accumulated.items())
 
     return required_ore
 
@@ -58,7 +62,8 @@ with parser.input as input:
 
         recipes[product_name] = int(product_amount), ings
 
-# binary search of the highest possible produced fuel amount for up to 1 trillion ORE
+# binary search of the highest possible
+# produced fuel amount for up to 1 trillion ORE
 lower = 1
 higher = 1000000000000
 last_middle = None

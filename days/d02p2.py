@@ -18,7 +18,8 @@ with parser.input as input:
     line = input.readline()
     program = [int(el) for el in line.split(',')]
 
-filtered = ((n, v) for n, v in product(range(100), range(100)) if run_with_params(program, n, v) == 19690720)
+filtered = ((n, v) for n, v in product(range(100), range(100))
+            if run_with_params(program, n, v) == 19690720)
 noun, verb = next(filtered)
 
 solution = 100 * noun + verb

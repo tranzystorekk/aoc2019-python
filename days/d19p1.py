@@ -19,7 +19,8 @@ class Scanner:
     def run(self):
         for pos in product(range(self.__grid_size), range(self.__grid_size)):
             self.__next_position = iter(pos)
-            self.__drone = Machine(deepcopy(self.__program_copy), self.__get_position, self.__get_output)
+            self.__drone = Machine(
+                deepcopy(self.__program_copy), self.__get_position, self.__get_output)
             self.__drone.run()
 
     def __get_position(self):

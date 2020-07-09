@@ -27,7 +27,7 @@ class Grid:
         for y in range(y_s + 1, y_s + length + 1):
             self.__steps += 1
             cell = x_s, y
-            if not cell in self.__cells:
+            if cell not in self.__cells:
                 self.__cells[cell] = self.__steps
 
     def __down(self, start, length):
@@ -35,7 +35,7 @@ class Grid:
         for y in range(y_s - 1, y_s - length - 1, -1):
             self.__steps += 1
             cell = x_s, y
-            if not cell in self.__cells:
+            if cell not in self.__cells:
                 self.__cells[cell] = self.__steps
 
     def __left(self, start, length):
@@ -43,7 +43,7 @@ class Grid:
         for x in range(x_s - 1, x_s - length - 1, -1):
             self.__steps += 1
             cell = x, y_s
-            if not cell in self.__cells:
+            if cell not in self.__cells:
                 self.__cells[cell] = self.__steps
 
     def __right(self, start, length):
@@ -51,7 +51,7 @@ class Grid:
         for x in range(x_s + 1, x_s + length + 1):
             self.__steps += 1
             cell = x, y_s
-            if not cell in self.__cells:
+            if cell not in self.__cells:
                 self.__cells[cell] = self.__steps
 
 

@@ -35,7 +35,8 @@ class PaintState(Enum):
 
 class Arcade:
     def __init__(self, program):
-        self.__cpu = Machine(program, self.__get_joystick, self.__get_instructions)
+        self.__cpu = Machine(program, self.__get_joystick,
+                             self.__get_instructions)
         self.__grid = {}
         self.__paint_state = PaintState.NOTHING_READ
         self.__score = 0

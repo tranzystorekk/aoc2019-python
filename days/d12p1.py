@@ -55,7 +55,8 @@ def axis_gravity(a, b):
 
 def do_time_step(moons):
     for moon_a, moon_b in combinations(moons, 2):
-        gravity = [axis_gravity(c_a, c_b) for c_a, c_b in zip(moon_a.position, moon_b.position)]
+        gravity = [axis_gravity(c_a, c_b) for c_a, c_b in zip(
+            moon_a.position, moon_b.position)]
         grav_a = Vector(*map(itemgetter(0), gravity))
         grav_b = Vector(*map(itemgetter(1), gravity))
         moon_a.apply_gravity(grav_a)
