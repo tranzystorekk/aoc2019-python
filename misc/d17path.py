@@ -81,7 +81,6 @@ class Camera:
             return
 
         if mapping.is_robot:
-            robot_dir = self.__dir_mapping[mapping]
             self.__vacuum_robot = self.__position, self.__dir_mapping[mapping]
 
         self.__image[self.__position] = mapping
@@ -116,21 +115,22 @@ while True:
     if image.get(position_forward, None) is Pixel.SCAFFOLD:
         pos = position_forward
         steps_forward += 1
-    else:
-        dirs = ((dir.turn(n), instr) for n, instr in turns)
-        turn_dirs = ((d, d.azimuth, instr) for d, instr in dirs)
-        turn_positions = ((d, (x + a_x, y + a_y), instr) for d, (a_x, a_y), instr in turn_dirs)
-        valid_positions = ((d, i) for d, p, i in turn_positions if image.get(p, None) is Pixel.SCAFFOLD)
-        turned_direction, instruction = next(valid_positions, (None, None))
+        continue
 
-        if turned_direction is None:
-            path.append(steps_forward)
-            break
+    dirs = ((dir.turn(n), instr) for n, instr in turns)
+    turn_dirs = ((d, d.azimuth, instr) for d, instr in dirs)
+    turn_positions = ((d, (x + a_x, y + a_y), instr) for d, (a_x, a_y), instr in turn_dirs)
+    valid_positions = ((d, i) for d, p, i in turn_positions if image.get(p, None) is Pixel.SCAFFOLD)
+    turned_direction, instruction = next(valid_positions, (None, None))
 
-        dir = turned_direction
-        if steps_forward > 0:
-            path.append(steps_forward)
-        path.append(instruction)
-        steps_forward = 0
+    if turned_direction is None:
+        path.append(steps_forward)
+        break
+
+    dir = turned_direction
+    if steps_forward > 0:
+        path.append(steps_forward)
+    path.append(instruction)
+    steps_forward = 0
 
 print(*path)
