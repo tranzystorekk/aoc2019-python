@@ -4,7 +4,7 @@ from utils.parse import Parser
 
 def successors(start, func):
     next = start
-    while next is not None:
+    while True:
         yield next
         next = func(next)
 
@@ -14,7 +14,7 @@ def fuel_req(mass):
 
 
 def fuel_req_chained(initial_mass):
-    start = val if (val := fuel_req(initial_mass)) > 0 else None
+    start = fuel_req(initial_mass)
     chain = successors(start, fuel_req)
     valid_chain = takewhile(lambda val: val > 0, chain)
     return sum(valid_chain)
